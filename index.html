@@ -60,15 +60,56 @@
             button:hover{
                 background-color:dimgrey;
             }
+
+            #form {
+                display: none;
+                text-align: center;
+            }
+
+            input {
+                width: 90%;
+                outline: none;
+                margin: 10px 5%;
+                padding: 15px 10px;
+                font-size: 15px;
+                border: 2px solid silver;
+                border-radius: 5px;
+            }
+
+            input:focus {
+                border-color:dimgray
+            }
+
         </style>
     </head>
     <body>
-        <div id="TelegramBot">
+        <div id="main">
             <h1>Анти-Борщевик</h1>
             <img src="https://www.micoriza.ru/wp-content/uploads/2022/06/%D0%91%D0%BE%D1%80%D1%89%D0%B5%D0%B2%D0%B8%D0%BA-%D1%81%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE.jpg">
             <button id="verify">Подтвердить</button>
         </div>
+        <form id="form">
+            <input type="text" placeholder="Фамилия Имя" id="user_name">
+            <input type="text" placeholder="Email" id="user_email">
+            <input type="text" placeholder="Номер телефона" id="user_phone">
+            <button id="send">Отправить</button>
+        </form>
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <script>
+            let tg = window.Telegram.WebApp;
+            let verify = document.getElementById("verify");
+            let send = document.getElementById("send");
 
+            verify.addEventListener("click", () => {
+                document.getElementById("main").style.display = "none";
+                document.getElementById("form").style.display = "block";
+            });
+
+            order.addEventListener("click", () => {
+                tg.close();
+            });
+
+
+        </script>
     </body>
 </html>
