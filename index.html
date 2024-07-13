@@ -18,8 +18,8 @@
             body{
                 font-family: 'Oswald', sans-serif;
                 font-weight: 2000;
-                color:cornsilk;
-                background-color:rgb(77, 12, 255);
+                color: var(--tg-theme-text-color);
+                background: var(--tg-theme-bg-color);
                 width: 400px;
             }
 
@@ -53,12 +53,12 @@
                 margin-left: 30px;
                 cursor: pointer;
                 transition: all 500ms ease;
-                color:bisque;
-                background-color:rgb(51, 77, 51);
+                color: var(--tg-theme-button-text-color);
+                background: var(--tg-theme-button-color);
             }
 
             button:hover{
-                background-color:dimgrey;
+                background: var(--tg-theme-secondary-bg-color);
             }
 
             #form {
@@ -108,30 +108,29 @@
             });
 
             send.addEventListener("click", () => {
+                document.getElementById("error").innerText = '';
+                let name = document.getElementById("user_name").value;
+                let email = document.getElementById("user_email").value;
+                let phone = document.getElementById("user_phone").value;
+                if(name.length < 2) {
+                    document.getElementById("error").innerText = 'Ошибка в имени';
+                    return;
+                }
+                if(email.length < 5) {
+                    document.getElementById("error").innerText = 'Ошибка в email';
+                    return;
+                }
+                if(phone.length < 10) {
+                    document.getElementById("error").innerText = 'Ошибка в номере телефона';
+                    return;
+                }
+                let data = {
+                    name: name,
+                    email: email,
+                    phone: phone
+                }
+                tg.sendData(JSON.stringify(data));
                 tg.close();
-                tg.close();
-                // document.getElementById("error").innerText = '';
-                // let name = document.getElementById("user_name").value;
-                // let email = document.getElementById("user_email").value;
-                // let phone = document.getElementById("user_phone").value;
-                // if(name.length < 2) {
-                //     document.getElementById("error").innerText = 'Ошибка в имени';
-                //     return;
-                // }
-                // if(email.length < 5) {
-                //     document.getElementById("error").innerText = 'Ошибка в email';
-                //     return;
-                // }
-                // if(phone.length < 10) {
-                //     document.getElementById("error").innerText = 'Ошибка в номере телефона';
-                //     return;
-                // }
-                // let data = {
-                //     name: name,
-                //     email: email,
-                //     phone: phone
-                // }
-                // tg.sendData(JSON.stringify(data));
                 
             });
 
